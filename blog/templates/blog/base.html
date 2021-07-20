@@ -13,6 +13,10 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
                 {% endif %}
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'sing_in' %}" class="top-menu" >Sing in</a>
+                    <a href="{% url 'registration' %}" class="top-menu" >Registration</a>
+                {% endif %}
                 <h1><a href="/">Django Girls Blog</a></h1>
             </div>
             <div class="content container">

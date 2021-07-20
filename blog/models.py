@@ -16,3 +16,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class MyUser(models.Model):
+    login = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    email = models.EmailField()
+    #gender = models.TextChoices('Man', 'Woman')
+    date_of_birth = models.DateField()
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.login
