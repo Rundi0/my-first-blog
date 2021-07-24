@@ -11,6 +11,7 @@
         <body>
             <div class="page-header">
                 {% if user.is_authenticated %}
+                    <a href="{% url 'sing_out' %}" class="top-menu">Sing out</a>
                     <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
                 {% endif %}
                 {% if not user.is_authenticated %}

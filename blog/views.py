@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from .models import Post
 from .forms import PostForm, RegistrationForm, SingInForm
@@ -65,6 +65,10 @@ def registration(request):
     else:
         form = RegistrationForm()
     return render(request, "registration/registration.html", {'form': form})
+
+def sing_out(request):
+    logout(request)
+    return redirect('/')
 
 
 def log_info(request):
