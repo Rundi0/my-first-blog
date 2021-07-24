@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 from .models import Post
 from .forms import PostForm, RegistrationForm, SingInForm
 
@@ -69,6 +70,11 @@ def registration(request):
 def sing_out(request):
     logout(request)
     return redirect('/')
+
+def my_posts(request):
+    user = User.objects.get(username=request.user)
+    posts = Post.objects.filter(author=user.id)
+    return render(request, "blog/post_list.html", {'posts':posts})
 
 
 def log_info(request):
