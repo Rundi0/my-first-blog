@@ -14,5 +14,21 @@
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
+
+        {% for comment in comments %}
+        <div class="comment">
+            <div class="date">
+                {{ comment.published_date }}
+            </div>
+            <h4>{{ comment.author }}</h4>
+            <p>{{ comment.text|linebreaksbr }}</p>
+        </div>
+        {% endfor %}
+
+        <h3>Оставь коментарий:</h3>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="save btn btn-default">Sand</button>
+        </form>
     </div>
 {% endblock %}

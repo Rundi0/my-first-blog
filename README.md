@@ -7,7 +7,7 @@
  
 Активация виртуальной среды
     source [name]/bin/activate         #linux
-    [name]\Scripts\activate.bat        #windows
+    [name]\Scripts\activate.bat        #windows cmd
  
 Восстановление зависимостей:
     pip install -r requirements.txt

@@ -1,5 +1,8 @@
+from datetime import time
 from django.conf import settings
+from django.contrib import auth
 from django.db import models
+from django.db.models.deletion import CASCADE, DO_NOTHING, SET_DEFAULT, SET_NULL
 from django.utils import timezone
 
 
@@ -16,6 +19,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True)
+    text = models.CharField(max_length=500)
+    created_date = models.DateTimeField(default=timezone.now)
+
 
 class MyUser(models.Model):
     login = models.CharField(max_length=100)
