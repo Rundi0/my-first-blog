@@ -4,9 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.views import View
-from .models import Comment, Post
-from .forms import CommentForm, PostForm, RegistrationForm, SingInForm
 
+from blog.models import Comment, Post
+from .forms import PostForm, SingInForm, RegistrationForm, CommentForm
 
 class PostNew(View):
     def get(self, request):
@@ -117,7 +117,7 @@ def log_info(request):
     print('POST:', request.POST)
     print('COOKIES:', request.COOKIES)
     print('FILES:', request.FILES)
-#    print('META:', request.META)
+    print('META:', request.META)
     print('headers:', request.headers)
     print('user:', request.user)
     print('get_host:', request.get_host())

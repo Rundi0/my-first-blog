@@ -22,19 +22,12 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=CASCADE)
+    post = models.ForeignKey(Post, on_delete=CASCADE, related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=SET_NULL, null=True)
     text = models.CharField(max_length=500)
     created_date = models.DateTimeField(default=timezone.now)
-
-
-class MyUser(models.Model):
-    login = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    email = models.EmailField()
-    #gender = models.TextChoices('Man', 'Woman')
-    date_of_birth = models.DateField()
-    created_date = models.DateTimeField(default=timezone.now)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, 
+                                null=True, related_name='children')
 
     def __str__(self):
-        return self.login
+        return self.text

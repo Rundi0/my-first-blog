@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db.models.fields import CharField
 from django.forms.widgets import PasswordInput
-from .models import Comment, Post, MyUser
+from .models import Comment, Post
 
 class PostForm(forms.ModelForm):
 
