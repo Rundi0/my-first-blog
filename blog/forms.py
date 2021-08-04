@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, EmailField, TextField
 from django.forms.widgets import PasswordInput
 from .models import Comment, Post
 
@@ -37,3 +37,9 @@ class CommentForm(forms.ModelForm):
         labels = {
             'text' : (''),
         }
+
+
+class SendMailForm(forms.Form):
+    title = forms.CharField(max_length=200)
+    text = forms.CharField(max_length=1000)
+    email = forms.EmailField()

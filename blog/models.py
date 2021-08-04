@@ -1,6 +1,4 @@
-from datetime import time
 from django.conf import settings
-from django.contrib import auth
 from django.db import models
 from django.db.models.deletion import CASCADE, DO_NOTHING, SET_DEFAULT, SET_NULL
 from django.utils import timezone

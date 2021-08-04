@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
@@ -6,7 +7,21 @@ from django.contrib.auth.models import User
 from django.views import View
 
 from blog.models import Comment, Post
-from .forms import PostForm, SingInForm, RegistrationForm, CommentForm
+from .forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm
+from blog.postmark import send_mail_simple
+
+class SendMailView(View):
+    def get(self, request):
+        form = SendMailForm()
+        return render(request, 'registration/sand_email.html', {'form': form})
+
+    def post(self, request):
+        to_mail = request.POST['email']
+        title = request.POST['title']
+        text = request.POST['text']
+        if not all((to_mail, title, text)):
+            return HttpResponse("Incorrect data!")
+        return HttpResponse(send_mail_simple((to_mail,), title, text))
 
 class PostNew(View):
     def get(self, request):

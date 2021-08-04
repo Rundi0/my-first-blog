@@ -15,9 +15,9 @@ urlpatterns = [
     path('posts/<int:pk>/', views.PostDetailView.as_view()),
     path('posts/<int:pk>/comment', views.CommentView.as_view()),
 
-    path('users/', views.UsersView.as_view()),
-    path('users/<int:pk>', views.UsersDetailView.as_view()),
+    path('users/', views.UsersView.as_view(), name='user-list'),
+    path('users/<int:pk>', views.UsersDetailView.as_view(), name='user-datail'),
     #path('comment/', views.CommentCreateView.as_view()),
 ]
 
-urlpatterns.extend(router.urls)
+urlpatterns += router.urls

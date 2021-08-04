@@ -17,16 +17,25 @@ class RecursiveSerializer(serializers.Serializer):
     def to_representation(self, instance):
         serializer = self.parent.parent.__class__(instance, context=self.context)
         return serializer.data
-        
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = "__all__"
+
 
 class PostListSerializer(serializers.ModelSerializer):
+    #url = serializers.HyperlinkedIdentityField(view_name='posts', lookup_field='slug')
 
     class Meta:
         model = Post
         fields = ('title','text','created_date')
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
     author = serializers.SlugRelatedField(slug_field='username', read_only=True)
     post = serializers.SlugRelatedField(slug_field='title', read_only=True)
@@ -55,11 +64,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = "__all__"
 
 
 class GroupSerializer(serializers.ModelSerializer):
