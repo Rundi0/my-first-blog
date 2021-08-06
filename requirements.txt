@@ -1,3 +1,5 @@
 Django~=2.2.4
 djangorestframework
-mailchimp-marketing
+postmark
+postmarker
+celery
