@@ -1,0 +1,13 @@
+POSTMARK = {
+    'TOKEN': '31944658-d06f-4cd6-8dc2-b10c9c11752a',
+    'TEST_MODE': False,
+    'VERBOSITY': 0,
+}
+PM_API_KEY = '31944658-d06f-4cd6-8dc2-b10c9c11752a'
+MAIL_ADDRESS = 'giciw46480@cytsl.com'
+
+EMAIL_HOST = 'smtp.postmarkapp.com'
+EMAIL_HOST_USER = '31944658-d06f-4cd6-8dc2-b10c9c11752a'
+EMAIL_HOST_PASSWORD = '31944658-d06f-4cd6-8dc2-b10c9c11752a'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

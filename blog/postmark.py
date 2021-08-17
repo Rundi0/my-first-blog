@@ -18,9 +18,11 @@ def send_mail_simple(to_mail : list, title : str, text : str):
         smtp_send_mail(to_mail, title, text)
     except ClientError as e:
         print(e.error_code)
-        return "ERROR! Incorect date!"
+        print("ERROR! Incorect date!")
+        return False
     
-    return "Successful send mail!"
+    print("Successful send mail!")
+    return True
 
 def smtp_send_mail(to_mails : list, title : str, body : str):
     send_mail(title, body,MAIL_ADDRESS, to_mails, fail_silently=False)

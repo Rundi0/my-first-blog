@@ -7,8 +7,10 @@ from django.contrib.auth.models import User
 from django.views import View
 
 from blog.models import Comment, Post
-from .forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm
+from blog.forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm
 from blog.postmark import send_mail_simple
+from .tasks import add, celery_send_mail
+from mysite.celery import debug_task
 
 class SendMailView(View):
     def get(self, request):
@@ -21,7 +23,10 @@ class SendMailView(View):
         text = request.POST['text']
         if not all((to_mail, title, text)):
             return HttpResponse("Incorrect data!")
-        return HttpResponse(send_mail_simple((to_mail,), title, text))
+        
+        celery_send_mail.delay((to_mail,), title, text)
+
+        return HttpResponse("Your mail send!")
 
 class PostNew(View):
     def get(self, request):

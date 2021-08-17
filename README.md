@@ -20,3 +20,12 @@
  
 Запуск сервера локального веб сервера:
     python manage.py runserver
+
+Запуск celery:
+    celery -A celery worker -l INFO
+
+Запуск демона docker wsl:
+    sudo /etc/init.d/docker start
+
+    sudo docker run -d -p 5672:5672 rabbitmq &&
+    sudo docker run -d -p 6379:6379 redis
