@@ -22,7 +22,8 @@
     python manage.py runserver
 
 Запуск celery:
-    celery -A celery worker -l INFO
+    celery -A mysite worker -l INFO
+    sudo celery multi start 1
 
 Запуск демона docker wsl:
     sudo /etc/init.d/docker start
