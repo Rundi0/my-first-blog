@@ -1,8 +1,0 @@
-Django~=2.2.4
-djangorestframework
-django_celery_results
-postmark
-postmarker
-celery
-redis
-psycopg2-binary==2.8.6
