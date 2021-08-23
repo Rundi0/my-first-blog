@@ -43,3 +43,6 @@ class SendMailForm(forms.Form):
     title = forms.CharField(max_length=200)
     text = forms.CharField(max_length=1000)
     email = forms.EmailField()
+
+class TaskForm(forms.Form):
+    text = forms.CharField(max_length=1000)

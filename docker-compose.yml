@@ -44,3 +44,15 @@ services:
     depends_on:
       - web
       - redis
+  celery_beat:
+    build: .
+    command: celery -A mysite beat -l INFO -S django
+    env_file: 
+      - .env
+    volumes:
+      - .:/code
+    links:
+      - redis
+    depends_on:
+      - web
+      - redis

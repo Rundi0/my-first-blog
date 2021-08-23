@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "35b3090a170cc4d8d604fdba7335a6f5c24f9d3def20f0d0ed9ab58c67da59c4"
+            "sha256": "f09e14f2034bd105ddbfc6196a3763139a57baa737807f29f4326a1a46a8b2ab"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -91,6 +91,14 @@
             "index": "pypi",
             "version": "==2.2.24"
         },
+        "django-celery-beat": {
+            "hashes": [
+                "sha256:97ae5eb309541551bdb07bf60cc57cadacf42a74287560ced2d2c06298620234",
+                "sha256:ab43049634fd18dc037927d7c2c7d5f67f95283a20ebbda55f42f8606412e66c"
+            ],
+            "index": "pypi",
+            "version": "==2.2.1"
+        },
         "django-celery-results": {
             "hashes": [
                 "sha256:cc0285090a306f97f1d4b7929ed98af0475bf6db2568976b3387de4fbe812edc",
@@ -98,6 +106,14 @@
             ],
             "index": "pypi",
             "version": "==2.2.0"
+        },
+        "django-timezone-field": {
+            "hashes": [
+                "sha256:6dc782e31036a58da35b553bd00c70f112d794700025270d8a6a4c1d2e5b26c6",
+                "sha256:97780cde658daa5094ae515bb55ca97c1352928ab554041207ad515dee3fe971"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==4.2.1"
         },
         "djangorestframework": {
             "hashes": [
@@ -186,6 +202,12 @@
             ],
             "index": "pypi",
             "version": "==2.8.6"
+        },
+        "python-crontab": {
+            "hashes": [
+                "sha256:4bbe7e720753a132ca4ca9d4094915f40e9d9dc8a807a4564007651018ce8c31"
+            ],
+            "version": "==2.5.1"
         },
         "python-dateutil": {
             "hashes": [

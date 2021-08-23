@@ -12,4 +12,5 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.PostEdit.as_view(), name='post_edit'),
     path('post/my_posts/', views.my_posts, name='my_posts'),
     path('sand_email/', views.SendMailView.as_view(), name='sand_email'),
+    path('sand_regular_task/', views.SendRegularTask.as_view(), name='sand_regular_task'),
 ]

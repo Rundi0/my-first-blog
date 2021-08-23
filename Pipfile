@@ -13,6 +13,7 @@ redis = "*"
 psycopg2-binary = "==2.8.6"
 Django = "~=2.2.4"
 certifi = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

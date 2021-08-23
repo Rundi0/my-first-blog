@@ -1,3 +1,4 @@
+from mysite.celery import app
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -5,12 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.views import View
+from django_celery_beat.models import PeriodicTask, IntervalSchedule
+import json
 
 from blog.models import Comment, Post
-from blog.forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm
+from blog.forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm, TaskForm
 from blog.postmark import send_mail_simple
 from .tasks import add, celery_send_mail
-from mysite.celery import debug_task
+from mysite.celery import debug_task, setup_periodic_tasks
 
 class SendMailView(View):
     def get(self, request):
@@ -27,6 +30,38 @@ class SendMailView(View):
         celery_send_mail.delay((to_mail,), title, text)
 
         return HttpResponse("Your mail send!")
+
+class SendRegularTask(View):
+    def get(self, request):
+        form = TaskForm()
+        return render(request, 'registration/sand_email.html', {'form': form})
+
+    def post(self, request):
+        text = request.POST['text']
+        if not text:
+            return HttpResponse("Incorrect data!")
+        
+        PeriodicTask.objects.create(
+					name='Repeat order {}'.format(1),
+					task='mysite.celery.test',
+					interval=IntervalSchedule.objects.get(every=10, period='seconds'),
+					args=json.dumps([text]),
+					start_time=timezone.now(),
+		)
+        # schedule, created = IntervalSchedule.objects.get_or_create(
+        # every=1,
+        # period=IntervalSchedule.SECONDS,)
+
+        # app.conf.beat_schedule = {
+        #     'add-every-30-seconds': {
+        #     'task': 'tasks.add',
+        #     'schedule': 1.0,
+        #     'args': (16, 16)
+        #     },
+        # }
+        # app.conf.timezone = 'UTC'
+        
+        return HttpResponse("Your task send!")
 
 class PostNew(View):
     def get(self, request):
