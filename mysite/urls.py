@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]

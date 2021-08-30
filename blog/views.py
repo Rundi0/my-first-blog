@@ -13,7 +13,7 @@ from blog.models import Comment, Post
 from blog.forms import PostForm, SendMailForm, SingInForm, RegistrationForm, CommentForm, TaskForm
 from blog.postmark import send_mail_simple
 from .tasks import add, celery_send_mail
-from mysite.celery import debug_task, setup_periodic_tasks
+from mysite.celery import debug_task
 
 class SendMailView(View):
     def get(self, request):
@@ -48,18 +48,6 @@ class SendRegularTask(View):
 					args=json.dumps([text]),
 					start_time=timezone.now(),
 		)
-        # schedule, created = IntervalSchedule.objects.get_or_create(
-        # every=1,
-        # period=IntervalSchedule.SECONDS,)
-
-        # app.conf.beat_schedule = {
-        #     'add-every-30-seconds': {
-        #     'task': 'tasks.add',
-        #     'schedule': 1.0,
-        #     'args': (16, 16)
-        #     },
-        # }
-        # app.conf.timezone = 'UTC'
         
         return HttpResponse("Your task send!")
 

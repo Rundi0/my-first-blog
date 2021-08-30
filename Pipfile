@@ -14,6 +14,9 @@ psycopg2-binary = "==2.8.6"
 Django = "~=2.2.4"
 certifi = "*"
 django-celery-beat = "*"
+djangorestframework-simplejwt = "*"
+django-filter = "*"
+social-auth-app-django = "*"
 
 [dev-packages]
 

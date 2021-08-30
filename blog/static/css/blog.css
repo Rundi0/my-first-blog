@@ -44,3 +44,32 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
+
+img {
+    border: 3px solid #282c34;
+  }
+  .container-fluid {
+    height: 100vh;
+    background-color: #282c34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container-fluid > div {
+    width: 85%;
+    min-width: 300px;
+    max-width: 500px;
+  }
+  .card {
+    width: 100%;
+  }
+  .social-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .btn a, .btn a:hover {
+    color: white;
+    text-decoration: none ;
+  }
