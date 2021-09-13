@@ -17,6 +17,10 @@ django-celery-beat = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
 social-auth-app-django = "*"
+djoser = "*"
+sentry-sdk = "*"
+scapy = "*"
+scrapy = "*"
 
 [dev-packages]
 

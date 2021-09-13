@@ -13,7 +13,10 @@
             {% endif %}
         {% endif %}
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p class="main-text-blog">{{ post.text|linebreaksbr }}</p>
+
+        <h2><a href="{% url 'post_detail' pk=post.pk|add:'1' %}" class="next-page">Next</a></h2>
+        <h2><a href="{% url 'post_detail' pk=post.pk|add:'-1' %}">Back</a></h2>
 
         {% for comment in comments %}
         <div class="comment">
@@ -24,7 +27,7 @@
             <p>{{ comment.text|linebreaksbr }}</p>
         </div>
         {% endfor %}
-
+        
         <h3>Оставь коментарий:</h3>
         <form method="POST" class="post-form">{% csrf_token %}
             {{ comment_form.as_p }}
