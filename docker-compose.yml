@@ -16,8 +16,11 @@ services:
       - "5432:5432"
   
   web:
+    image: django_image
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py collectstatic
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
     #command: python manage.py makemigrations
     #command: python manage.py migrate
     #command: pipenv run pip list
@@ -33,7 +36,7 @@ services:
       - redis
   
   celery:
-    build: .
+    image: django_image
     command: celery -A mysite worker -l INFO
     env_file: 
       - .env
@@ -45,7 +48,7 @@ services:
       - web
       - redis
   celery_beat:
-    build: .
+    image: django_image
     command: celery -A mysite beat -l INFO -S django
     env_file: 
       - .env
@@ -56,3 +59,15 @@ services:
     depends_on:
       - web
       - redis
+
+  nginx:
+    image: nginx
+    build: ./compose/nginx
+    volumes:
+      - ./compose/nginx:/etc/nginx/conf.d
+      - ./mysite/static:/home/app/microservice/static
+    ports:
+     - 80:80
+     - 433:433
+    depends_on:
+      - web
