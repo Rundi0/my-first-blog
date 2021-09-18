@@ -60,14 +60,34 @@ services:
       - web
       - redis
 
-  nginx:
+  webserver:
     image: nginx
     build: ./compose/nginx
     volumes:
       - ./compose/nginx:/etc/nginx/conf.d
-      - ./mysite/static:/home/app/microservice/static
+      - ./mysite/static:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     ports:
      - 80:80
-     - 433:433
+     - 443:443
     depends_on:
       - web
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./mysite/static:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email mostvk@gmail.com --agree-tos --no-eff-email --force-renewal -d mostvk.ga  -d www.mostvk.ga
+
+volumes:
+  certbot-etc:
+  certbot-var:
+
+
