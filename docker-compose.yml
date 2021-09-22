@@ -28,6 +28,7 @@ services:
       - .env
     volumes:
       - .:/code
+      - static_file:/var/www/html
     ports:
       - "8000:8000"
     depends_on:
@@ -65,7 +66,7 @@ services:
     build: ./compose/nginx
     volumes:
       - ./compose/nginx:/etc/nginx/conf.d
-      - ./mysite/static:/var/www/html
+      - static_file:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     ports:
@@ -78,7 +79,7 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./mysite/static:/var/www/html
+      - static_file:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
       
@@ -89,5 +90,6 @@ services:
 volumes:
   certbot-etc:
   certbot-var:
+  static_file:
 
 
