@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#from django.contrib.auth.views import logout
+from django.conf import settings
 
 def trigger_error(request):
     division_by_zero = 1 / 0
@@ -22,8 +24,9 @@ def trigger_error(request):
 urlpatterns = [
     path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
+    #path('logout/', logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    path('', include('blog.urls')),
 ]

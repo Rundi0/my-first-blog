@@ -16,8 +16,11 @@ services:
       - "5432:5432"
   
   web:
+    image: django_image
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py collectstatic
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
     #command: python manage.py makemigrations
     #command: python manage.py migrate
     #command: pipenv run pip list
@@ -25,6 +28,7 @@ services:
       - .env
     volumes:
       - .:/code
+      - static_file:/var/www/html
     ports:
       - "8000:8000"
     depends_on:
@@ -33,7 +37,7 @@ services:
       - redis
   
   celery:
-    build: .
+    image: django_image
     command: celery -A mysite worker -l INFO
     env_file: 
       - .env
@@ -46,7 +50,7 @@ services:
       - redis
   
   celery_beat:
-    build: .
+    image: django_image
     command: celery -A mysite beat -l INFO -S django
     env_file: 
       - .env
@@ -57,3 +61,36 @@ services:
     depends_on:
       - web
       - redis
+
+  webserver:
+    image: nginx
+    build: ./compose/nginx
+    volumes:
+      - ./compose/nginx:/etc/nginx/conf.d
+      - static_file:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    ports:
+     - 80:80
+     - 443:443
+    depends_on:
+      - web
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - static_file:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email mostvk@gmail.com --agree-tos --no-eff-email --force-renewal -d mostvk.ga  -d www.mostvk.ga
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  static_file:
+
+

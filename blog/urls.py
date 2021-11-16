@@ -13,4 +13,7 @@ urlpatterns = [
     path('post/my_posts/', views.my_posts, name='my_posts'),
     path('sand_email/', views.SendMailView.as_view(), name='sand_email'),
     path('sand_regular_task/', views.SendRegularTask.as_view(), name='sand_regular_task'),
+    path('privacy-demo/', views.my_posts),
+    path('terms-demo/', views.my_posts),
+    path('facebook-login/', views.post_list),
 ]
