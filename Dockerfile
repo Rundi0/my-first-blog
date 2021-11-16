@@ -15,5 +15,3 @@ COPY Pipfile.lock /code/
 RUN pipenv install --deploy --system
 
 COPY . /code/
-
-RUN python manage.py migrate 
