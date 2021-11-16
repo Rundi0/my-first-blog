@@ -1,4 +1,4 @@
-Запуска в docker:
+Запуск в docker:
     docker-compose up
 
 
